@@ -249,18 +249,7 @@ fn->SetParameter(0,9.67147);
    //fn->SetParLimits(3,-6e10,-5e9);
  fn->SetParameter(4,-1000);
  fn->SetParLimits(4,-80000,0);
-/*
-  // Set Parameter Values
-  //fn->SetParameter(4,-10000);
-  fn->SetParameter(0,9.67147);
-  //fn->SetParameter(1,-3.94e9);
-  //if (cut.name.compare("cosTheta")) fn->SetParameter(1,-4e7);
-  //fn->SetParameter(1,-4e7);
-  fn->SetParameter(2,11);
-  //fn->SetParameter(2, 0.002);
-  //fn->SetParLimits(2,0,1000);
-	fn->SetParameter(3, -1.11e10);
- */
+
    //fn->FixParameter(3, -1.10630e10);  // Change to SetParameter to re-fit rate value
   fn->SetLineColor(kMagenta);
  }else{
@@ -405,47 +394,17 @@ void automateCuts(){
   }
         
   hist = new TH1D ("hist1","Lifetime Plot", numBins,lowLim,highLim);
- /*
-  errorCuts(delR, 3, 0.325, 280, 4.475, false);
-  errorCuts(pT, 75, 3.75, 2000,20.125, false);
-  errorCuts(massK, 450, 4.15, 550, 4.15, true);
-  errorCuts(massL, 1118, 2.99, 0, 0, false);
- */
+
  errorCuts(delR,25,1.325,475,13.225);
  errorCuts(pT,100,6.55,10500,254.275);
   errorCuts(massK, 295, 4.15, 490, 4.15);
   errorCuts(massL, 1110, 2.99, 1120, 2.99, true);
   
-  //delR.max = 275.525;
-  //pT.max = 2020.12;
-  //performCut(delR);
- // performCut(pT);
  
-  //cosTheta.min = 0.99995;
-  //performCut(cosTheta,false);
-  /*
-  //float minR[] = {2.68,3,4,5,10,15};
-  //float maxR[] = {120,200,300,400,500,700,800,1000};
-  float minR[] = {0};
-  float maxR[] = {210,220,230,240,250,260,270,280,290};
-  float minCos[] = {0.9998,0.9999,0.99995,0.99998};
-  //float minPT[] = {25,40,50,60,75,100};
-  float minPT[] = {200};
-  float maxPT[] = {1500,1750,2250};//,2500,2750};
- // float minPT[] = {50,100,200,300,400,500};
-  //float maxPT[] = {2000,3000,5000,7500,10000,12000};
-  float minKM[] = {460,450,440,470,480,485,490};
-  float maxKM[] = {540,550,560,530,520,515,510};
-  //float maxKM[] = {540,550,560};
-  //float minKM[] = {460,450,440};
-  float minLM[] = {1120,1125,1130};
-  //float minLM[] = {1119};
-  
-   // float minKM[] = {460,450,440,470,480,485,490};
-  //float maxKM[] = {540,550,560,530,520,515,510};
+ 
   float minR[] = {2,26,27,23};
   float maxR[] = {0};
-  //float minCos[] = {0.99995,0.99996,0.99997,0.99998,.99999};
+  float minCos[] = {0.99995,0.99996,0.99997,0.99998,.99999};
   float minPT[] = {50,60,70,80,90};//,350};//,375,425,450};
   float maxPT[] = {0};//,9500};//,9750,10250,10500};//,2500,2750};
   float minKM[] = {290.85,299.15};
@@ -454,73 +413,15 @@ void automateCuts(){
   float minLM[] = {1090,1108};//,1109,1111};
   float maxLM[] = {1140,1122};//,1121,1119};
   
- // float minCos[] = {0.9991,0.9992,0.9993,0.9994,0.9996};
-  
- // performCuts(massL, minLM, maxLM, sizeof(minLM)/sizeof(minLM[0]), sizeof(maxLM)/sizeof(maxLM[0]),true);
-  
- // performCuts(cosTheta,minCos,{0},sizeof(minCos)/sizeof(minCos[0]),0,false);
+ performCuts(massL, minLM, maxLM, sizeof(minLM)/sizeof(minLM[0]), sizeof(maxLM)/sizeof(maxLM[0]),true);
+ performCuts(cosTheta,minCos,{0},sizeof(minCos)/sizeof(minCos[0]),0,false);
   performCuts(delR,minR,maxR,sizeof(minR)/sizeof(minR[0]),sizeof(maxR)/sizeof(maxR[0]),false);
-  
-   performCuts(pT,minPT,maxPT,sizeof(minPT)/sizeof(minPT[0]),sizeof(maxPT)/sizeof(maxPT[0]),false);
- // performCuts(massK, minKM, maxKM, sizeof(minKM)/sizeof(minKM[0]),sizeof(maxKM)/sizeof(maxKM[0]),false);
-*/
+ perormCuts(pT,minPT,maxPT,sizeof(minPT)/sizeof(minPT[0]),sizeof(maxPT)/sizeof(maxPT[0]),false);
+ performCuts(massK, minKM, maxKM, sizeof(minKM)/sizeof(minKM[0]),sizeof(maxKM)/sizeof(maxKM[0]),false);
 
 
 
   file.close();
-
-/*
-    // Min and max values for each cut
-  cosTheta.min = 0.9998;
-  cosTheta.max = 0;
-  cosTheta.name = "RecCosTheta";
-  delR.min = 17;
-  delR.max = 25;
-  delR.name = "RecDelR";
-  pT.min = 500;
-  pT.max = 1000;
-  pT.name = "RecPt";
-  massK.min = 340;
-  massK.max = 475;
-  massK.name = "RecMass";
-  massL.min = 1110;
-  massL.max = 1120;
-  massL.name = "RecMassLambda";
-  none.name = "NoCut";
-  none.min = 0;
-  none.max = 0;
-
-
-
-
-
-    
-  
-  file.open (ptcl.symbol+"_Results"+getTime()+".csv");
-
-
-  float minCos[] = {0.99995};//{0.9998,0.9999,0.99995,0.99998};
-  float minR[] = {7.896,10};//,12,17};
-  float maxR[] = {100,120};//{60,80,100,120};
-  float minPT[] = {450};//{400,500,600,700,800};
-  float maxPT[] = {3000};//{2000,2500,3000};
-  float maxMK[] = {};//{500,490};//,480,475,450};
-  float minML[] = {};//{1100,1105,1110};
-  float maxML[] = {};//{1130,1125,1120};
-  
-  
-  float minCos[] = {0.9998,0.9999,0.99995,0.99998};
-  float minR[] = {2.68,3,4,5,10,15};
-  float maxR[] = {80,100,120,200,300,400,500};
-  float minPT[] = {100,200,300,400,500,600};
-  float maxPT[] = {2000,2500,3000,5000,75000,10000};
-  float minMK[] = {490,485,480,470};//,480,475,450};
-  float maxMK[] = {510,515,520,530};
-  float minML[] = {1118,1120,1125,1130};//{1100,1105,1110};
-  float maxML[] = {};//{1130,1125,1120};
-
-  
-*/
 
   
 
